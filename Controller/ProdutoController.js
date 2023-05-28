@@ -1,5 +1,4 @@
-import Produto from "../Models/ProdutoModel.js"
-
+import { Produto } from "../models/Relacao.js"
 class ProdutoController {
     static async getProduct(req, res) {
         const produto = await Produto.findAll()

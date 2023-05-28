@@ -1,4 +1,4 @@
-import Vendas from "../models/VendasModel.js"
+import { Vendas } from "../models/Relacao.js"
 class VendasController {
     static async getVendas(req,res){
         const venda = await Vendas.findAll()

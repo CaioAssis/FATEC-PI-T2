@@ -1,4 +1,4 @@
-import Compras from "../Models/ComprasModel.js"
+import { Compras } from "../models/Relacao.js"
 
 class ComprasController {
     static async getCompras(req,res){

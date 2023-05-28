@@ -1,4 +1,4 @@
-import DetCompras from "../models/DetComprasModel.js"
+import { DetCompras } from "../models/Relacao.js"
 class DetComprasController {
     static async getDetCompras(req,res){
         const detCompra = await DetCompras.findAll()

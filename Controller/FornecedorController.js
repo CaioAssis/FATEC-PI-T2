@@ -1,4 +1,4 @@
-import Fornecedor from "../Models/FornecedorModel.js"
+import { Fornecedor } from "../models/Relacao.js"
 
 class FornecedorController {
     static async getFornecedores(req, res) {

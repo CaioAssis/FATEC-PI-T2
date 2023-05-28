@@ -1,4 +1,4 @@
-import Cliente from "../Models/ClienteModel.js"
+import { Cliente } from "../models/Relacao.js"
 
 class ClienteController {
     static async getClients(req,res){
