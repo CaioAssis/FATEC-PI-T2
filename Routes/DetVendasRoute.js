@@ -3,10 +3,10 @@ import DetVendasController from "../Controller/DetVendasController.js"
 
 const DetVendasRouter = express.Router()
 
-DetVendasRouter.get("/", DetVendasController.getDetVenda)
+DetVendasRouter.get("/", DetVendasController.getDetVendas)
 DetVendasRouter.post("/", DetVendasController.createDetVenda)
-DetVendasRouter.get("/:idPedido", DetVendasController.getDetPedidoVendaById)
-DetVendasRouter.delete("/:idPedido", DetVendasController.destroyDetPedidoVenda)
-DetVendasRouter.put("/:idPedido", DetVendasController.updateDetPedidoVenda)
+DetVendasRouter.get("/:idPedido", DetVendasController.getDetVendaById)
+DetVendasRouter.delete("/:idPedido", DetVendasController.destroyDetVenda)
+DetVendasRouter.put("/:idPedido", DetVendasController.updateDetVenda)
 
 export default DetVendasRouter

@@ -3,10 +3,10 @@ import VendasController from "../Controller/VendasController.js"
 
 const VendasRouter = express.Router()
 
-VendasRouter.get("/", VendasController.getVenda)
+VendasRouter.get("/", VendasController.getVendas)
 VendasRouter.post("/", VendasController.createVenda)
-VendasRouter.get("/:idPedido", VendasController.getPedidoVendaById)
-VendasRouter.delete("/:idPedido", VendasController.destroyPedidoVenda)
-VendasRouter.put("/:idPedido", VendasController.updatePedidoVenda)
+VendasRouter.get("/:idPedido", VendasController.getVendaById)
+VendasRouter.delete("/:idPedido", VendasController.destroyVenda)
+VendasRouter.put("/:idPedido", VendasController.updateVenda)
 
 export default VendasRouter
