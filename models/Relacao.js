@@ -8,21 +8,21 @@ import Produto from "../Models/ProdutoModel.js"
 import Vendas from "../models/VendasModel.js"
 
 Fornecedor.hasMany(Compras)
-Compras.belongsTo(Fornecedor)
+Compras.belongsTo(Fornecedor, {constraints: true})
 
 Compras.hasMany(DetCompras)
-DetCompras.belongsTo(Compras)
+DetCompras.belongsTo(Compras, {constraints: true})
 
-DetCompras.belongsTo(Produto)
+DetCompras.belongsTo(Produto, {constraints: true})
 Produto.hasMany(DetCompras)
 
 Produto.hasMany(DetVendas)
-DetVendas.belongsTo(Produto)
+DetVendas.belongsTo(Produto, {constraints: true})
 
-DetVendas.belongsTo(Vendas)
+DetVendas.belongsTo(Vendas, {constraints: true})
 Vendas.hasMany(detVendas)
 
-Vendas.belongsTo(Cliente)
+Vendas.belongsTo(Cliente, {constraints: true})
 Cliente.hasMany(Vendas)
 
 

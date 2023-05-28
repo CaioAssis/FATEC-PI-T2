@@ -2,7 +2,7 @@ import { Compras } from "../models/Relacao.js"
 
 class ComprasController {
     static async getCompras(req,res){
-        const compra = await Compras.findAll()
+        const compra = await Compras.findAll({include: ['fornecedor', 'detCompras']})
         res.json(compra)
     }
 
@@ -19,7 +19,7 @@ class ComprasController {
 
     static async getCompraById(req, res){
         const id = parseInt(req.params.id)
-        const compra = await Compras.findByPk(id)
+        const compra = await Compras.findByPk(id, {include: ['fornecedor', 'detCompras']})
         if(!compra){
             res.status(404).json({error:"Não encontrado"})
             return

@@ -1,7 +1,7 @@
 import { Vendas } from "../models/Relacao.js"
 class VendasController {
     static async getVendas(req,res){
-        const venda = await Vendas.findAll()
+        const venda = await Vendas.findAll({include: ['cliente', 'detVendas']})
         res.json(venda)
     }
 
@@ -18,7 +18,7 @@ class VendasController {
 
     static async getVendaById(req, res){
         const id = parseInt(req.params.id)
-        const venda = await Vendas.findByPk(id)
+        const venda = await Vendas.findByPk(id, {include: ['cliente', 'detVendas']})
         if(!venda){
             res.status(404).json({error:"Não encontrado"})
             return

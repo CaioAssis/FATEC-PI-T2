@@ -1,7 +1,7 @@
 import { Produto } from "../models/Relacao.js"
 class ProdutoController {
     static async getProduct(req, res) {
-        const produto = await Produto.findAll()
+        const produto = await Produto.findAll({include: ['detCompras', "detVendas"]})
         res.json(produto)
     }
 
@@ -18,7 +18,7 @@ class ProdutoController {
 
     static async getProdutoById(req, res){
         const id = parseInt(req.params.id)
-        const produto = await Produto.findByPk(id)
+        const produto = await Produto.findByPk(id, {include: ['detCompras', "detVendas"]})
         if(!produto){
             res.status(404).json({error: "Não encontrado."})
             return

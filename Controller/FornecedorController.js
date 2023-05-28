@@ -2,13 +2,13 @@ import { Fornecedor } from "../models/Relacao.js"
 
 class FornecedorController {
     static async getFornecedores(req, res) {
-        const fornecedores = await Fornecedor.findAll()
+        const fornecedores = await Fornecedor.findAll({include: 'compras'})
         res.json(fornecedores)
     }
 
     static async getFornecedorById(req, res) {
         const id = parseInt(req.params.id)
-        const fornecedor = await Fornecedor.findByPk(id)
+        const fornecedor = await Fornecedor.findByPk(id, {include: 'compras'})
         if (!fornecedor) {
             res.status(404).json({ error: "Não encontrado" })
             return
