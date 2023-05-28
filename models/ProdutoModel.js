@@ -24,11 +24,11 @@ const Produto = db.define('produto', {
         allowNull: false
     },
     valorEntrada: {
-        type: Sequelize.DECIMAL(10,2),
+        type: Sequelize.FLOAT,
         allowNull: false
     },
     valorVenda: {
-        type: Sequelize.DECIMAL(10,2),
+        type: Sequelize.FLOAT,
         allowNull: false
     }
 })
