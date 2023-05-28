@@ -1,222 +1,61 @@
-import Compras from "../models/ComprasModel.js"
-class comprasController {
-    static async getCompras(req, res) {
-        const Compra = await Compras.findAll()
-        res.json(Compra)
+import Compras from "../Models/ComprasModel.js"
+
+class ComprasController {
+    static async getCompras(req,res){
+        const compra = await Compras.findAll()
+        res.json(compra)
     }
 
-    static async procura(req, res) {}
-
-    static async createCompra(req, res) {
-        const {
-            nome,
-            cnpj,
-            telefone,
-            dataPedido,
-            dataEntrega,
-            totalPedido,
-            formaPagamento,
-        } = req.body
-        if (
-            !nome ||
-            !cnpj ||
-            !telefone ||
-            !dataPedido ||
-            !dataEntrega ||
-            !totalPedido ||
-            !formaPagamento
-        ) {
-            res.status(400).json({ error: "Todos campos são obrigatórios!!" })
+    static async createCompra(req, res){
+        const {dataPedido, dataEntrega, totalPedido, formaPagamento} = req.body
+        if (!dataPedido || !dataEntrega || !totalPedido || !formaPagamento) {
+            res.status(400).json({error: "Informe todos os campos!"})
             return
         }
-
+        
         const createdCompra = await Compras.create(req.body)
         res.status(201).json(createdCompra)
     }
 
-    static async getCompraById(req, res) {
-        const idPedido = parseInt(req.params.idPedido)
-        const Compra = await Compras.findByPk(idPedido)
-        if (!Compra) {
-            res.status(404).json({ error: "Não encontrado." })
-            return
-        }
-        res.status(200).json(Compra)
-    }
-
-    static async destroyCompra(req, res) {
-        const idPedido = parseInt(req.params.idPedido)
-        const Compra = await Compras.findByPk(idPedido)
-        if (!Compra) {
-            res.status(404).json({ error: "Compra Não encontrada." })
-            return
-        }
-        await Compra.destroy({ where: { idPedido: Compra.idPedido } })
-        res.json({ message: "Compra Removida com sucesso!" })
-    }
-
-    static async updateCompra(req, res) {
-        const idPedido = parseInt(req.params.idPedido)
-        const Compra = await Compras.findByPk(idPedido)
-        if (!Compra) {
-            res.status(404).json({ error: "Compra Não encontrada." })
-            return
-        }
-
-        const {
-            nome,
-            cnpj,
-            telefone,
-            dataPedido,
-            dataEntrega,
-            totalPedido,
-            formaPagamento,
-        } = req.body
-        if (
-            !nome ||
-            !cnpj ||
-            !telefone ||
-            !dataPedido ||
-            !dataEntrega ||
-            !totalPedido ||
-            !formaPagamento
-        ) {
-            res.status(400).json({ error: "Todos campos são obrigatórios!!" })
-            return
-        }
-
-        const updatedCompra = await Compras.update(
-            {
-                nome,
-                cnpj,
-                telefone,
-                dataPedido,
-                dataEntrega,
-                totalPedido,
-                formaPagamento,
-                valorEntrada,
-                valorVenda,
-            },
-            { where: { idPedido: Compras.idPedido } }
-        )
-        res.json(updatedCompra)
-    }
-}
-
-export default comprasController
-
-/*import {
-    Compras,
-    create,
-    createModelCompra,
-    findCompraByPk,
-    findComprasByPk,
-    getAllCompras,
-    updateCompra,
-} from "../models/ComprasModel.js"
-
-class ComprasController {
-    static getCompra(req, res) {
-        res.json(getAllCompras())
-    }
-
-    static createCompras(req, res) {
-        const {
-            nome,
-            cnpj,
-            telefone,
-            dataPedido,
-            dataEntrega,
-            totalPedido,
-            formaPagamento,
-        } = req.body
-        if (
-            !nome ||
-            !cnpj ||
-            !telefone ||
-            !dataPedido ||
-            !dataEntrega ||
-            !totalPedido ||
-            !formaPagamento
-        ) {
-            res.status(400).json({ error: "Todos campos são obrigatórios!!" })
-            return
-        }
-
-        const compra = new Compras(
-            0,
-            nome,
-            cnpj,
-            telefone,
-            dataPedido,
-            dataEntrega,
-            totalPedido,
-            formaPagamento
-        )
-        const createCompra = createModelCompra(compra)
-        res.status(201).json(createCompra)
-    }
-
-    static getComprasById(req, res) {
-        const id = parseInt(req.params.idPedido)
-        const compra = findComprasByPk(idPedido)
-        if (!compra) {
-            res.status(404).json({ error: "Compra inexistente!!" })
+    static async getCompraById(req, res){
+        const id = parseInt(req.params.id)
+        const compra = await Compras.findByPk(id)
+        if(!compra){
+            res.status(404).json({error:"Não encontrado"})
             return
         }
         res.status(200).json(compra)
     }
-    static destroyCompras(req, res) {
-        const idPedido = parseInt(req.params.idPedido)
-        const compra = findComprasByPk(idPedido)
-        if (!compra) {
-            res.status(404).json({ error: "Compra Inexistente!!" })
+
+    static async destroyCompra(req,res){
+        const id = parseInt(req.params.id)
+        const compra = await Compras.findByPk(id)
+        if(!compra){
+            res.status(404).json({error:"Não encontrado"})
             return
         }
-        this.destroyCompras(idPedido)
-        res.json({ message: "Removido com sucesso!" })
+        await Compras.destroy({where: {id: compra.id}})
+        res.json({message: "Removido com sucesso!"})
     }
-    static updateCompras(req, res) {
-        const idPedido = parseInt(req.params.idPedido)
-        const compra = findComprasByPk(idPedido)
-        if (!compra) {
-            res.status(404).json({ error: "Compra inexistente!!" })
+
+    static async updateCompra(req, res){
+        const id = parseInt(req.params.id)
+        const compra = await Compras.findByPk(id)
+        if(!compra){
+            res.status(404).json({error:"Não encontrado"})
             return
         }
 
-        const {
-            nome,
-            cnpj,
-            telefone,
-            dataPedido,
-            dataEntrega,
-            totalPedido,
-            formaPagamento,
-        } = req.body
-        if (
-            !nome ||
-            !cnpj ||
-            !telefone ||
-            !dataPedido ||
-            !dataEntrega ||
-            !totalPedido ||
-            !formaPagamento
-        ) {
-            res.status(400).json({
-                error: " Todos os campos são obrigatórios!",
-            })
+        const {dataPedido, dataEntrega, totalPedido, formaPagamento} = req.body
+        if (!dataPedido || !dataEntrega || !totalPedido || !formaPagamento) {
+            res.status(400).json({error: "Informe todos os campos!"})
             return
         }
-        compra.nome = nome
-        compra.cnpj = cnpj
-        compra.telefone = telefone
-        compra.dataPedido = Date(dataPedido)
-        compra.dataEntrega = Date(dataEntrega)
-        compra.totalPedido = Number(totalPedido)
-        compra.formaPagamento = formaPagamento
 
-        updateCompras(idPedido, compra)
-        res.json(compra)
+        const updatedCompra = await Compras.update({dataPedido, dataEntrega, totalPedido, formaPagamento}, {where: {id: compra.id}})
+        res.json(updatedCompra)
     }
+
 }
-*/
+
+export default ComprasController

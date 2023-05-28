@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize"
 import db from "../db.js"
 
-const detCompras = db.define("detCompras", {
+const DetCompras = db.define("detCompras", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -17,4 +17,4 @@ const detCompras = db.define("detCompras", {
     },
 })
 
-export default detCompras
+export default DetCompras
