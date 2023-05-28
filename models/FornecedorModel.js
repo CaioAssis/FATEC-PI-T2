@@ -1,6 +1,5 @@
 import { Sequelize } from "sequelize"
 import db from "../db.js"
-import Compras from "../models/ComprasModel.js"
 
 const Fornecedor = db.define("fornecedor", {
     id: {
@@ -49,7 +48,5 @@ const Fornecedor = db.define("fornecedor", {
         allowNull: false,
     },
 })
-
-Fornecedor.hasMany(Compras)
 
 export default Fornecedor
