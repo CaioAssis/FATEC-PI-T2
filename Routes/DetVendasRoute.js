@@ -5,8 +5,8 @@ const DetVendasRouter = express.Router()
 
 DetVendasRouter.get("/", DetVendasController.getDetVendas)
 DetVendasRouter.post("/", DetVendasController.createDetVenda)
-DetVendasRouter.get("/:idPedido", DetVendasController.getDetVendaById)
-DetVendasRouter.delete("/:idPedido", DetVendasController.destroyDetVenda)
-DetVendasRouter.put("/:idPedido", DetVendasController.updateDetVenda)
+DetVendasRouter.get("/:id", DetVendasController.getDetVendaById)
+DetVendasRouter.delete("/:id", DetVendasController.destroyDetVenda)
+DetVendasRouter.put("/:id", DetVendasController.updateDetVenda)
 
 export default DetVendasRouter

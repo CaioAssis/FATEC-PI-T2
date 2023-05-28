@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize"
 import db from "../db.js"
 
-const detCompras = db.define("detVendas", {
+const detVendas = db.define("detVendas", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -12,7 +12,7 @@ const detCompras = db.define("detVendas", {
         allowNull: false,
     },
     quantidade: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.FLOAT,
         allowNull: false,
     },
     valor: {

@@ -8,7 +8,7 @@ const DetCompras = db.define("detCompras", {
         primaryKey: true,
     },
     quantidade: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.FLOAT,
         allowNull: false,
     },
     valor: {

@@ -16,11 +16,11 @@ db.sync(() => console.log("Banco de dados preparado"))
 
 app.use("/clientes", ClienteRouter)
 app.use("/produtos", ProdutoRouter)
-app.use("/Compras", ComprasRouter)
-app.use("/DetalhesCompras", DetComprasRouter)
-app.use("/Vendas", VendasRouter)
-app.use("/DetalhesVendas", DetVendasRouter)
-app.use("/Fornecedor", FornecedorRouter)
+app.use("/compras", ComprasRouter)
+app.use("/detalhesCompras", DetComprasRouter)
+app.use("/vendas", VendasRouter)
+app.use("/detalhesVendas", DetVendasRouter)
+app.use("/fornecedores", FornecedorRouter)
 
 const port = process.env.PORT || 3000
 
