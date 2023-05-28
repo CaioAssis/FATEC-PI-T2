@@ -6,8 +6,8 @@ class VendasController {
     }
 
     static async createVenda(req, res){
-        const {descricaoPedido, quantidade, valor} = req.body
-        if (!descricaoPedido || !quantidade || !valor) {
+        const {dataPedido, dataEntrega, totalPedido, formaPagamento} = req.body
+        if (!dataPedido || !dataEntrega || !totalPedido || !formaPagamento) {
             res.status(400).json({error: "Informe todos os campos!"})
             return
         }
@@ -45,13 +45,13 @@ class VendasController {
             return
         }
 
-        const {descricaoPedido, quantidade, valor} = req.body
-        if (!descricaoPedido || !quantidade || !valor) {
+        const {dataPedido, dataEntrega, totalPedido, formaPagamento} = req.body
+        if (!dataPedido || !dataEntrega || !totalPedido || !formaPagamento) {
             res.status(400).json({error: "Informe todos os campos!"})
             return
         }
 
-        const updatedVenda = await Vendas.update({descricaoPedido, quantidade, valor}, {where: {id: venda.id}})
+        const updatedVenda = await Vendas.update({dataPedido, dataEntrega, totalPedido, formaPagamento}, {where: {id: venda.id}})
         res.json(updatedVenda)
     }
 
