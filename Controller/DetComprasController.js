@@ -1,7 +1,7 @@
-import DetCompras from "../models/DetComprasModel.js"
+import { DetCompras } from "../models/Relacao.js"
 class DetComprasController {
     static async getDetCompras(req,res){
-        const detCompra = await DetCompras.findAll()
+        const detCompra = await DetCompras.findAll({include: ['compra', 'produto']})
         res.json(detCompra)
     }
 
@@ -18,7 +18,7 @@ class DetComprasController {
 
     static async getDetCompraById(req, res){
         const id = parseInt(req.params.id)
-        const detCompra = await DetCompras.findByPk(id)
+        const detCompra = await DetCompras.findByPk(id, {include: ['compra', 'produto']})
         if(!detCompra){
             res.status(404).json({error:"Não encontrado"})
             return

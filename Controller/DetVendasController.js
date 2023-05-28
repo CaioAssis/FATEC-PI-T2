@@ -1,7 +1,7 @@
-import DetVendas from "../models/DetVendasModel.js"
+import { DetVendas } from "../models/Relacao.js"
 class DetVendasController {
     static async getDetVendas(req,res){
-        const detVenda = await DetVendas.findAll()
+        const detVenda = await DetVendas.findAll({include: ['venda', 'produto']})
         res.json(detVenda)
     }
 
@@ -18,7 +18,7 @@ class DetVendasController {
 
     static async getDetVendaById(req, res){
         const id = parseInt(req.params.id)
-        const detVenda = await DetVendas.findByPk(id)
+        const detVenda = await DetVendas.findByPk(id, {include: ['venda', 'produto']})
         if(!detVenda){
             res.status(404).json({error:"Não encontrado"})
             return

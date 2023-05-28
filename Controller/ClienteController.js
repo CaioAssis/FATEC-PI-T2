@@ -1,8 +1,8 @@
-import Cliente from "../Models/ClienteModel.js"
+import { Cliente } from "../models/Relacao.js"
 
 class ClienteController {
     static async getClients(req,res){
-        const cliente = await Cliente.findAll()
+        const cliente = await Cliente.findAll({include: 'vendas'})
         res.json(cliente)
     }
 
@@ -19,7 +19,7 @@ class ClienteController {
 
     static async getClienteById(req, res){
         const id = parseInt(req.params.id)
-        const cliente = await Cliente.findByPk(id)
+        const cliente = await Cliente.findByPk(id, {include: 'vendas'})
         if(!cliente){
             res.status(404).json({error: "Não encontrado."})
             return
