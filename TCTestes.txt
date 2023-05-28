@@ -1,0 +1,70 @@
+http://localhost:3000/produtos
+{
+  "descricao" : "templateDescricao",
+  "fichaTecnica" : "templateFichaTecnica",
+  "unidadeMedida" : "templateUnidadeMedida",
+  "tipoProduto" : "templateTipoProduto",
+  "valorEntrada": 9.99,
+  "valorVenda" : 99.99
+  }
+
+
+http://localhost:3000/clientes
+{
+  "nome" : "templatenome",
+  "cpf" : "templatecpf",
+  "telefone" : "templatetelefone",
+  "cep" : "templatecep",
+  "estado" : "templateestado",
+  "cidade" : "templatecidade",
+  "bairro" : "templatebairro",
+  "endereco" : "templateendereco",
+  "complemento" : "templatecomplemento",
+  "email" : "templateemail"
+}
+
+
+http://localhost:3000/fornecedores
+{
+  "nome" : "templatenome",
+  "cnpj" : "templatecnpj",
+  "telefone" : "templatetelefone",
+  "cep" : "templatecep",
+  "estado" : "templateestado",
+  "cidade" : "templatecidade",
+  "bairro" : "templatebairro",
+  "endereco" : "templateendereco",
+  "complemento" : "templatecomplemento",
+  "email" : "templateemail"
+}
+
+
+http://localhost:3000/compras
+{
+  "dataPedido" : "2023-02-01",
+  "dataEntrega" : "2023-03-01",
+  "totalPedido" : 99.99,
+  "formaPagamento" : "templateformaPagamento"
+}
+
+
+http://localhost:3000/detalhesCompras
+{
+  "quantidade" : 9.99,
+  "valor" : 99.99
+}
+
+http://localhost:3000/vendas
+{
+  "dataPedido" : "2023-02-01",
+  "dataEntrega" : "2023-03-01",
+  "totalPedido" : 99.99,
+  "formaPagamento" : "templateformaPagamento"
+}
+
+http://localhost:3000/detalhesVendas
+{
+  "descricaoPedido" : "templateDescricaoPedido",
+  "quantidade" : 9.99,
+  "valor" : 99.99
+}

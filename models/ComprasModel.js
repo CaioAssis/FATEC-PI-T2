@@ -8,11 +8,11 @@ const Compras = db.define('compras',{
         primaryKey: true
     },
     dataPedido: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
     },
     dataEntrega: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
     },
     totalPedido: {

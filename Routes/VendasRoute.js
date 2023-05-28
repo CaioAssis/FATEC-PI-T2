@@ -5,8 +5,8 @@ const VendasRouter = express.Router()
 
 VendasRouter.get("/", VendasController.getVendas)
 VendasRouter.post("/", VendasController.createVenda)
-VendasRouter.get("/:idPedido", VendasController.getVendaById)
-VendasRouter.delete("/:idPedido", VendasController.destroyVenda)
-VendasRouter.put("/:idPedido", VendasController.updateVenda)
+VendasRouter.get("/:id", VendasController.getVendaById)
+VendasRouter.delete("/:id", VendasController.destroyVenda)
+VendasRouter.put("/:id", VendasController.updateVenda)
 
 export default VendasRouter

@@ -23,7 +23,7 @@ class DetComprasController {
             res.status(404).json({error:"Não encontrado"})
             return
         }
-        res.status(200).json(compra)
+        res.status(200).json(detCompra)
     }
 
     static async destroyDetCompra(req,res){
