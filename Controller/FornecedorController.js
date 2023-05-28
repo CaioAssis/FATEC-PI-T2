@@ -27,29 +27,8 @@ class FornecedorController {
     }
 
     static async createFornecedor(req, res) {
-        const {
-            nome,
-            cpf,
-            telefone,
-            cep,
-            estado,
-            cidade,
-            bairro,
-            endereco,
-            complemento,
-            email,
-        } = req.body
-        if (
-            !nome ||
-            !cpf ||
-            !telefone ||
-            !cep ||
-            !estado ||
-            !cidade ||
-            !bairro ||
-            !endereco ||
-            !email
-        ) {
+        const {nome, cpf, telefone, cep, estado, cidade, bairro, endereco, complemento, email} = req.body
+        if (!nome || !cpf || !telefone || !cep || !estado || !cidade || !bairro || !endereco || !email) {
             res.status(400).json({
                 error: "Informe todos os campos obrigatórios!",
             })
@@ -68,29 +47,8 @@ class FornecedorController {
             return
         }
 
-        let {
-            nome,
-            cpf,
-            telefone,
-            cep,
-            estado,
-            cidade,
-            bairro,
-            endereco,
-            complemento,
-            email,
-        } = req.body
-        if (
-            !nome ||
-            !cpf ||
-            !telefone ||
-            !cep ||
-            !estado ||
-            !cidade ||
-            !bairro ||
-            !endereco ||
-            !email
-        ) {
+        let {nome, cpf, telefone, cep, estado, cidade, bairro, endereco, complemento, email} = req.body
+        if (!nome || !cpf || !telefone || !cep || !estado || !cidade || !bairro || !endereco || !email) {
             res.status(400).json({
                 error: "Informe todos os campos obrigatórios!",
             })
@@ -99,21 +57,7 @@ class FornecedorController {
 
         if (!complemento) complemento = null
 
-        const updatedFornecedor = await Fornecedor.update(
-            {
-                nome,
-                cpf,
-                telefone,
-                cep,
-                estado,
-                cidade,
-                bairro,
-                endereco,
-                complemento,
-                email,
-            },
-            { where: { id: fornecedor.id } }
-        )
+        const updatedFornecedor = await Fornecedor.update({nome, cpf, telefone, cep, estado, cidade, bairro, endereco, complemento, email}, { where: { id: fornecedor.id } })
         res.json(updatedFornecedor)
     }
 }
