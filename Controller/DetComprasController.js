@@ -16,7 +16,7 @@ class DetComprasController {
         res.json(createdDetCompra)
     }
 
-    static async getCompraById(req, res){
+    static async getDetCompraById(req, res){
         const id = parseInt(req.params.id)
         const detCompra = await DetCompras.findByPk(id)
         if(!detCompra){
@@ -26,14 +26,14 @@ class DetComprasController {
         res.status(200).json(compra)
     }
 
-    static async destroyCompra(req,res){
+    static async destroyDetCompra(req,res){
         const id = parseInt(req.params.id)
         const detCompra = await DetCompras.findByPk(id)
         if(!detCompra){
             res.status(404).json({error:"Não encontrado"})
             return
         }
-        await Compras.destroy({where: {id: compra.id}})
+        await DetCompras.destroy({where: {id: detCompra.id}})
         res.json({message: "Removido com sucesso!"})
     }
 

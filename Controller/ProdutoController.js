@@ -6,10 +6,6 @@ class ProdutoController {
         res.json(produto)
     }
 
-    static async procura(req, res){
-        
-    }
-
     static async createProduto(req, res){
         const {descricao, fichaTecnica, unidadeMedida, tipoProduto, valorEntrada, valorVenda} = req.body
         if(!descricao || !fichaTecnica || !unidadeMedida || !tipoProduto || !valorEntrada || !valorVenda){

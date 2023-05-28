@@ -1,109 +1,60 @@
-import {
-    Vendas,
-    update,
-    destroy,
-    findByPk,
-    create,
-    findAllVendas,
-} from "../models/VendasModel.js"
-
+import Vendas from "../models/VendasModel.js"
 class VendasController {
-    static getVenda(req, res) {
-        res.json(findAllVendas())
+    static async getVendas(req,res){
+        const venda = await Vendas.findAll()
+        res.json(venda)
     }
 
-    static createVenda(req, res) {
-        const {
-            idPedido,
-            idCliente,
-            nome,
-            cpf,
-            telefone,
-            dataPedido,
-            dataEntrega,
-            totalPedido,
-            formaPagamento,
-        } = req.body
-        if (!idPedido || !idCliente || !dataPedido) {
-            res.status(400).json({
-                error: "Cód. Pedido, Cod. Cliente e Data são obrigatórios",
-            })
+    static async createVenda(req, res){
+        const {dataPedido, dataEntrega, totalPedido, formaPagamento} = req.body
+        if (!dataPedido || !dataEntrega || !totalPedido || !formaPagamento) {
+            res.status(400).json({error: "Informe todos os campos!"})
             return
         }
 
-        const pedidoVenda = new Vendas(
-            idPedido,
-            idCliente,
-            nome,
-            cpf,
-            telefone,
-            dataPedido,
-            dataEntrega,
-            totalPedido,
-            formaPagamento
-        )
-        create(pedidoVenda)
-        res.json(pedidoVenda)
+        const createdVenda = await Vendas.create(req.body)
+        res.json(createdVenda)
     }
 
-    static getPedidoVendaById(req, res) {
-        const idPedido = parseInt(req.params.idPedido)
-        const pedidoVenda = findByPk(idPedido)
-        if (!pedidoVenda) {
-            res.status(404).json({ error: "Pedido de Venda não encontrado" })
+    static async getVendaById(req, res){
+        const id = parseInt(req.params.id)
+        const venda = await Vendas.findByPk(id)
+        if(!venda){
+            res.status(404).json({error:"Não encontrado"})
             return
         }
-        res.json(pedidoVenda)
+        res.status(200).json(venda)
     }
 
-    static destroyPedidoVenda(req, res) {
-        const idPedido = parseInt(req.params.idPedido)
-        const pedidoVenda = findByPk(idPedido)
-        if (!pedidoVenda) {
-            res.status(404).json({ error: "Pedido de Venda não encontrado" })
+    static async destroyVenda(req,res){
+        const id = parseInt(req.params.id)
+        const venda = await Vendas.findByPk(id)
+        if(!venda){
+            res.status(404).json({error:"Não encontrado"})
             return
         }
-        destroy(idPedido)
-        res.json({ message: "Pedido de Venda removido com sucesso" })
+        await Vendas.destroy({where: {id: venda.id}})
+        res.json({message: "Removido com sucesso!"})
     }
 
-    static updatePedidoVenda(req, res) {
-        const idPedido = parseInt(req.params.idPedido)
-        const pedidoVenda = findByPk(idPedido)
-        if (!pedidoVenda) {
-            res.status(404).json({ error: "Pedido de Venda não encontrado" })
+    static async updateVenda(req, res){
+        const id = parseInt(req.params.id)
+        const venda = await Vendas.findByPk(id)
+        if(!venda){
+            res.status(404).json({error:"Não encontrado"})
             return
         }
 
-        const {
-            idCliente,
-            nome,
-            cpf,
-            telefone,
-            dataPedido,
-            dataEntrega,
-            totalPedido,
-            formaPagamento,
-        } = req.body
-        if (!idCliente || !dataPedido) {
-            res.status(400).json({
-                error: "Cod. Cliente e Data são obrigatórios",
-            })
+        const {dataPedido, dataEntrega, totalPedido, formaPagamento} = req.body
+        if (!dataPedido || !dataEntrega || !totalPedido || !formaPagamento) {
+            res.status(400).json({error: "Informe todos os campos!"})
             return
         }
 
-        pedidoVenda.idCliente = idCliente
-        pedidoVenda.nome = nome
-        pedidoVenda.cpf = cpf
-        pedidoVenda.telefone = telefone
-        pedidoVenda.dataPedido = dataPedido
-        pedidoVenda.dataEntrega = dataEntrega
-        pedidoVenda.totalPedido = totalPedido
-        pedidoVenda.formaPagamento = formaPagamento
-
-        update(idPedido, pedidoVenda)
-        res.json(pedidoVenda)
+        const updatedVenda = await Vendas.update({dataPedido, dataEntrega, totalPedido, formaPagamento}, {where: {id: venda.id}})
+        res.json(updatedVenda)
     }
+
 }
 
 export default VendasController
